@@ -37,7 +37,8 @@ const displayPhones = (phones, dataLimit) => {
         <div class="card-body">
           <h5 class="card-title">${phone.phone_name}</h5>
           <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <button onclick="loadPhoneDetails('${phone.slug}')" href="#" class="btn btn-primary">Show Details</button>
+          <!-- Button trigger modal -->
+          <button onclick="loadPhoneDetails('${phone.slug}')" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDetailModal">Show Details</button>          
         </div>
       </div>
         `;
@@ -86,7 +87,22 @@ const loadPhoneDetails = async id =>{
   const url =`https://openapi.programming-hero.com/api/phone/${id}`;
   const  res = await fetch(url);
   const data = await res.json();
-  console.log(data.data);
+  displayPhoneDetails(data.data);
 }
 
-// loadPhones();
+const displayPhoneDetails = phone =>{
+  console.log(phone)
+  const modalTitle = document.getElementById('phoneDetailModalLabel');
+  modalTitle.innerText = phone.name;
+  const phoneDetails = document.getElementById('phone-details');
+  phoneDetails.innerHTML =`
+        <img src="${phone.image}" alt="">
+        <p>Release Data: ${phone.releaseDate ? phone.releaseDate: 'Not released yet'}</p>
+        <p>Storage: ${phone.mainFeatures ? phone.mainFeatures.storage : 'Found nothing'}</p>
+        <p>Bluetooth: ${phone.others ? phone.others.Bluetooth : 'Found nothing'}</p> 
+  
+  `
+
+}
+
+loadPhones('apple');
