@@ -99,7 +99,7 @@ const displayPhoneDetails = phone =>{
         <img src="${phone.image}" alt="">
         <p>Release Data: ${phone.releaseDate ? phone.releaseDate: 'Not released yet'}</p>
         <p>Storage: ${phone.mainFeatures ? phone.mainFeatures.storage : 'Found nothing'}</p>
-        <p>Bluetooth: ${phone.others ? phone.others.Bluetooth : 'Found nothing'}</p> 
+        <p>Bluetooth: ${phone.others ? phone.others.Bluetooth : 'Found nothing'}</p>
   
   `
 
